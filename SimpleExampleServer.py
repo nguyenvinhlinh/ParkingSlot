@@ -12,7 +12,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 import signal, sys, ssl, logging
 from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer, SimpleSSLWebSocketServer
-from optparse import OptionParser
+from optparse import OptionParser 
 
 logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
@@ -46,7 +46,7 @@ class SimpleChat(WebSocket):
                client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
             except Exception as n:
                print n
-
+            
 
    def handleConnected(self):
       print self.address, 'connected'
@@ -76,7 +76,6 @@ if __name__ == "__main__":
    parser.add_option("--ssl", default=0, type='int', action="store", dest="ssl", help="ssl (1: on, 0: off (default))")
    parser.add_option("--cert", default='./cert.pem', type='string', action="store", dest="cert", help="cert (./cert.pem)")
    parser.add_option("--ver", default=ssl.PROTOCOL_TLSv1, type=int, action="store", dest="ver", help="ssl version")
-   
    (options, args) = parser.parse_args()
 
    cls = SimpleEcho
@@ -93,5 +92,4 @@ if __name__ == "__main__":
       sys.exit()
 
    signal.signal(signal.SIGINT, close_sig_handler)
-
    server.serveforever()

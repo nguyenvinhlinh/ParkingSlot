@@ -7,7 +7,10 @@ logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 
 class SimpleChat(WebSocket):
-    
+    p1 = True
+    p2 = False
+    p3 = True
+    p4 = False
     def handleMessage(self):
         if self.data is None:
             self.data = ''
@@ -15,9 +18,14 @@ class SimpleChat(WebSocket):
         for client in self.server.connections.itervalues():
             if client != self:
                 try:
-                    client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
+                    #client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
+                    client.sendMessage(str(self.p1) + str(self.p2) + str(self.p3) + str(self.p4)  )
                 except Exception as n:
                     print n
+            # This will ignore the sending host
+            # else:
+            #     print "client is self"
+            
             
 
     def handleConnected(self):
