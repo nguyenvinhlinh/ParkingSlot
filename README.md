@@ -3,8 +3,8 @@
 2. DONE:  
 - Open a socket server which can broad cast data to all connected clients  
 3. TODO:   
-a. Take information from Raspberry PI
-b. Write html file
-c. Write javascript file to take data from socket server
-d. Write css file
+a. Take information from Raspberry PI  
+b. Write html file  
+c. Write javascript file to take data from socket server  
+d. Write css file  
 
