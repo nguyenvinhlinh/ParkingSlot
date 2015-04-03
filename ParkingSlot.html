@@ -7,7 +7,8 @@
 	div{
 		color: Yellow;
 		background: Blue;
-		font-size: 25px;
+		font-family: "Arial";
+		font-size: 50px;
 		width: 200px;
 		height: 200px;
 
@@ -28,16 +29,14 @@
 			Slot 4
 		</div>
 
-		<input type="button" name="updateButton" value="Update!"onClick="sendingRequest();">
+		<input type="button" name="updateButton" value="Instant Update!"onClick="sendingRequest();">
 
 	</body>
 	<script language="javascript" type="text/javascript" >
-	var slot1 = document.querySelector("#slot1");
-	var slot2 = document.querySelector("#slot2");
-	var slot3 = document.querySelector("#slot3");
-	var slot4 = document.querySelector("#slot4");
-	
 	var socket = new WebSocket("ws://localhost:8000/");
+	var automatic = false;
+	var interval = 3000;
+	
 	socket.onmessage = function(event){
 		updateContent(event.data);
 	}
@@ -58,5 +57,7 @@
 			}
 		}
 	}
+	window.setInterval(sendingRequest, interval);
+	
 	</script>
 </html>
