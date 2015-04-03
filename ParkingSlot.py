@@ -1,63 +1,65 @@
-<!DOCTYPE html>
-<html>
-	<head><meta charset="UTF-8">
-		<title>Title of the document</title>
-	</head>
-	<style>
-	div{
-		color: Yellow;
-		background: Blue;
-		font-family: "Arial";
-		font-size: 50px;
-		width: 200px;
-		height: 200px;
+import signal, sys, ssl, logging
+from SimpleWebSocketServer import WebSocket, SimpleWebSocketServer, SimpleSSLWebSocketServer
+from optparse import OptionParser 
 
-	}
-	</style>
+logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
-	<body>
-		<div id="slot1" style="position:relative; float:left  ">
-			Slot 1
-		</div>
-		<div id="slot2" style="position:relative; float:left  ">
-			Slot 2
-		</div>
-		<div id="slot3" style="position:relative; float:left  ">
-			Slot 3
-		</div>
-		<div id="slot4" style="position:relative; float:left  ">
-			Slot 4
-		</div>
 
-		<input type="button" name="updateButton" value="Instant Update!"onClick="sendingRequest();">
 
-	</body>
-	<script language="javascript" type="text/javascript" >
-	var socket = new WebSocket("ws://localhost:8000/");
-	var automatic = false;
-	var interval = 3000;
-	
-	socket.onmessage = function(event){
-		updateContent(event.data);
-	}
-	function sendingRequest(){
-		socket.send("update");
-	}
-	function updateContent(string){
-		var slots = string.split(",");
-		for (i = 0; i < slots.length;i++){
-			var content = slots[i].split(":");
-			var dom = document.querySelector("#"+content[0]);
-			if (content[1] == "True"){
-				console.log(content[0] + " is busy");
-				dom.style.background = "Red";
-			} else {
-				console.log(content[0] + " is avalable");
-				dom.style.background = "Green";
-			}
-		}
-	}
-	window.setInterval(sendingRequest, interval);
-	
-	</script>
-</html>
+class ParkingSlot(WebSocket):
+    p1 = True
+    p2 = False
+    p3 = True
+    p4 = False
+    def handleMessage(self):
+        if self.data is None:
+            self.data = ''
+        try:
+            self.sendMessage('slot1:'+ str(self.p1)+',slot2:'+str(self.p2)+',slot3:'+str(self.p3)+',slot4:'+str(self.p4)) 
+        except Exception as n:
+            print n
+                
+        # for client in self.server.connections.itervalues():
+        #     if client != self:
+        #         try:
+        #             #client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
+        #             client.sendMessage(str(self.p1) + str(self.p2) + str(self.p3) + str(self.p4)  )
+        #         except Exception as n:
+        #             print n
+            # This will ignore the sending host
+            # else:
+        #     #     print "client is self"
+            
+            
+
+    def handleConnected(self):
+        print self.address, 'connected'
+        for client in self.server.connections.itervalues():
+            if client != self:
+                try:
+                    client.sendMessage(str(self.address[0]) + ' - connected')
+                except Exception as n:
+                    print n
+
+    def handleClose(self):
+        print self.address, 'closed'
+        for client in self.server.connections.itervalues():
+            if client != self:
+                try:
+                    client.sendMessage(str(self.address[0]) + ' - disconnected')
+                except Exception as n:
+                    print n
+
+    def main():
+        print "Hello"
+
+if __name__ == "__main__":
+    cls = ParkingSlot
+    server = SimpleWebSocketServer("localhost", 8000, cls)
+
+    def close_sig_handler(signal, frame):
+        server.close()
+        sys.exit()
+
+    signal.signal(signal.SIGINT, close_sig_handler)
+    server.serveforever()

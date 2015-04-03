@@ -6,7 +6,7 @@ logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
 
 
 
-class SimpleChat(WebSocket):
+class ParkingSlot(WebSocket):
     p1 = True
     p2 = False
     p3 = True
@@ -54,7 +54,7 @@ class SimpleChat(WebSocket):
         print "Hello"
 
 if __name__ == "__main__":
-    cls = SimpleChat
+    cls = ParkingSlot
     server = SimpleWebSocketServer("localhost", 8000, cls)
 
     def close_sig_handler(signal, frame):
@@ -63,12 +63,3 @@ if __name__ == "__main__":
 
     signal.signal(signal.SIGINT, close_sig_handler)
     server.serveforever()
-    print "hello"
-    
-    
-    
-
-
-
-
-                    
