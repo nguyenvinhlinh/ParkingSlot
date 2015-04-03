@@ -14,17 +14,21 @@ class SimpleChat(WebSocket):
     def handleMessage(self):
         if self.data is None:
             self.data = ''
-      
-        for client in self.server.connections.itervalues():
-            if client != self:
-                try:
-                    #client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
-                    client.sendMessage(str(self.p1) + str(self.p2) + str(self.p3) + str(self.p4)  )
-                except Exception as n:
-                    print n
+        try:
+            self.sendMessage('slot1:'+ str(self.p1)+',slot2:'+str(self.p2)+',slot3:'+str(self.p3)+',slot4:'+str(self.p4)) 
+        except Exception as n:
+            print n
+                
+        # for client in self.server.connections.itervalues():
+        #     if client != self:
+        #         try:
+        #             #client.sendMessage(str(self.address[0]) + ' - ' + str(self.data))
+        #             client.sendMessage(str(self.p1) + str(self.p2) + str(self.p3) + str(self.p4)  )
+        #         except Exception as n:
+        #             print n
             # This will ignore the sending host
             # else:
-            #     print "client is self"
+        #     #     print "client is self"
             
             
 
