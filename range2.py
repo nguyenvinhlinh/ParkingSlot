@@ -33,9 +33,13 @@ def checkSensor():
           distance = round(distance, 2)            #Round to two decimal points
 
           if distance > 2 and distance < 100:      #Check whether the distance is within range
-            print "Sensor:",i," Distance:",distance - 0.5,"cm have car"  #Print distance with 0.5 cm calibration
+            print "Sensor:",i," Distance:",distance - 0.5,"cm have car"  #Print
+            #distance with 0.5 cm calibration
+            Output[i] = True
           else:
-            print "Sensor:",i,"Don't have car"                   #display out of range
+            print "Sensor:",i,"Don't have car"                   #display out of
+            #range
+            Output[i] = False
 
     except KeyboardInterrupt:
       GPIO.cleanup()  

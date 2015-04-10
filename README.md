@@ -6,5 +6,7 @@
 - Write html file  
 - Write javascript file to take data from socket server  
 - Write css file  
+
+
 **3. TODO:**  
 **4. How to run** `python ParkingSlot.py`
