@@ -1,6 +1,6 @@
-import signal, sys, ssl, logging,thread, range2
-from SimpleWebSocketServer import SimpleWebSocketServer
-logging.basicConfig(format='%(asctime)s %(message)s', level=logging.DEBUG)
+import signal, sys
+import range2 as SocketSensor
+from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 
 class ParkingSlot(WebSocket):
     def handleMessage(self):
@@ -32,7 +32,7 @@ class ParkingSlot(WebSocket):
 
 if __name__ == "__main__":
     try:
-            thread.start_new_thread(range2.checkSensor, ())
+        thread.start_new_thread(SocketSensor.checkSensor, ()) 
     except:
         print 'unable to start new thread for sensor checker'
     cls = ParkingSlot
