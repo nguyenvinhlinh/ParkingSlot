@@ -1,4 +1,4 @@
-import signal, sys
+import signal, sys, thread
 import range2 as SocketSensor
 from SimpleWebSocketServer import SimpleWebSocketServer, WebSocket
 
@@ -33,8 +33,9 @@ class ParkingSlot(WebSocket):
 if __name__ == "__main__":
     try:
         thread.start_new_thread(SocketSensor.checkSensor, ()) 
-    except:
+    except Exception as n:
         print 'unable to start new thread for sensor checker'
+        print n
     cls = ParkingSlot
     server = SimpleWebSocketServer("localhost", 8000, cls)
 
