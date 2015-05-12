@@ -14,7 +14,7 @@ application. The main component takes responsibility to handle updating date is
 Web Socket Server.   
 
 Web socket server is an open library which is written in python.
-[SimpleWebSocketServer]{https://github.com/opiate/SimpleWebSocketServer}  
+[SimpleWebSocketServer](https://github.com/opiate/SimpleWebSocketServer)  
 
 ## How to install:
 **a. Requirement**  
