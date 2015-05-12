@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+	<head><meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="mystyle.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+		<script src="js/bootstrap.min.js"></script>
+		<title>Parking Slots</title>
+	</head>
+	<style>
+	#slot1, #slot2, #slot3, #slot4 {
+		color: Yellow;
+		background: Green;
+		font-family: "Arial";
+		font-size: 50px;
+		width: 150px;
+		height: 200px;
+                text-align:center;
+                margin-right:3%;
+                margin-top:1%
+                
+	}
+        h1 {
+                text-align:center;
+                
+        }
+        #input {
+		font-family: "Arial";
+		font-size: 30px;
+		width: 150px;
+                text-align:center;
+                margin-right:3%;
+                margin-top:1%
+        }
+	</style>
+
+	<body>
+                <h1>Parking slot status</h1>
+                 <div>
+                      <p> <span style="color:green;font-weight:bold">Green</span> background when the slot is free</p>
+                      <p> <span style="color:red;font-weight:bold">Red</span> background when the slot is occupied</p>
+                 </div>
+		<div id="slot1" style="position:relative; float:left  ">
+			Slot 1
+		</div>
+		<div id="slot2" style="position:relative; float:left  ">
+			Slot 2
+		</div>
+		<div id="slot3" style="position:relative; float:left  ">
+			Slot 3
+		</div>
+		<div id="slot4" style="position:relative; float:left  ">
+			Slot 4
+		</div>
+                <div id="input">
+		    <input type="button" name="updateButton" value="Instant Update!"onClick="sendingRequest();">
+                </div>
+
+	</body>
+	<script language="javascript" type="text/javascript" >
+	var socket = new WebSocket("ws://localhost:8000/");
+	var automatic = false;
+	var interval = 10;
+	
+	socket.onmessage = function(event){
+		updateContent(event.data);
+	}
+	function sendingRequest(){
+		socket.send("update");
+	}
+	function updateContent(string){
+		var slots = string.split(",");
+		for (i = 0; i < slots.length;i++){
+			var content = slots[i].split(":");
+			var dom = document.querySelector("#"+content[0]);
+			if (content[1] == "True"){
+				console.log(content[0] + " is occupied");
+				dom.style.background = "Red";
+			} else {
+				console.log(content[0] + " is available");
+				dom.style.background = "Green";
+			}
+		}
+	}
+	window.setInterval(sendingRequest, interval);
+	
+	</script>
+</html>
