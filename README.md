@@ -19,12 +19,12 @@ Web socket server is an open library which is written in python.
 ## How to install:
 **a. Requirement**  
 The system requires a Apache Web Server, if you are using Raspbian you can use
-`sudo apt-get install apache2 -y` to install the website. The default directory
+`sudo apt-get install apache2 -y` to install the Apache Web server. The default directory
 of `html source` for apache2 is `/var/www`   
 
 **b. Installing**
 - Clone the repository `git clone
-  git@github.com:opiate/SimpleWebSocketServer.git`  
+  git@github.com:nguyenvinhlinh/ParkingSlot.git`  
 - In the file named `ParkingSlot.py`, change the IP of hosted Rapsberry PI
   instead of `localhost`, with favor port. The default value for web socket port
   is `8000`  
@@ -33,6 +33,6 @@ of `html source` for apache2 is `/var/www`
   Raspberry PI instead of `localhost:8000` with favor port  
 - In the root directory of repository, run the script `install.sh`, for example `./install.sh`  
 
-**c. Running**
+## How to run:
 - In the root directory of the repository, run the script `start.sh`, for
   example, `./start.sh`
