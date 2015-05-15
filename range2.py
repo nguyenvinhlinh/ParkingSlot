@@ -32,7 +32,7 @@ def checkSensor():
         distance = pulse_duration * 17150        #Multiply pulse duration by 17150 to get distance
         distance = round(distance, 2)            #Round to two decimal points
 
-        if distance > 2 and distance < 100:      #Check whether the distance is within range
+        if distance > 2 and distance < 6:      #Check whether the distance is within range
           print "Sensor:",i," Distance:",distance - 0.5,"cm have car"  #Print distance with 0.5 cm calibration
           Output[i] = True
         else:
