@@ -46,7 +46,7 @@
 
 			<div class="form-group">
 				<input type="text" id="IP_Add"class="form-control"
-				placeholder="localhost" value="172.16.120.57:8000"style="width: 50%;
+				placeholder="172.16.120.57:8530" value="172.16.120.57:8530"style="width: 50%;
 				display: inline; max-width:170px; " onclick="onClickText();">
 				<input type="checkbox" id="checked" name="IP-address" checked>
 				<div id = "errorlog" class="alert alert-success" role="alert" style="display:none;">Connected to server</div>
@@ -92,7 +92,8 @@
 	var IP_DOM = $("#IP_Add");
 	var checked_DOM = $("#checked");
 	var interval = 1000;
-	var socket = new WebSocket("ws://"+IP_DOM.val());
+	//	var socket = new WebSocket("ws://"+IP_DOM.val());
+	var socket = new WebSocket("ws://172.16.120.57:8000";
 	checked_DOM.on('switchChange.bootstrapSwitch', function(event, state){
 		console.log(state)
 			if (state == true) {

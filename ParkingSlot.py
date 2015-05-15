@@ -37,7 +37,7 @@ if __name__ == "__main__":
         print 'unable to start new thread for sensor checker'
         print n
     cls = ParkingSlot
-    server = SimpleWebSocketServer("localhost", 8000, cls)
+    server = SimpleWebSocketServer("172.16.120.57", 8530, cls)
 
     def close_sig_handler(signal, frame):
         server.close()
