@@ -7,7 +7,7 @@ class ParkingSlot(WebSocket):
         if self.data is None:
             self.data = ''
         try:
-            self.sendMessage('slot1:'+ str(range2.Output[0])+',slot2:'+ str(range2.Output[1])+',slot3:'+str(range2.Output[2])+',slot4:'+str(range2.Output[3])) 
+            self.sendMessage('slot1:'+ str(SocketSensor.Output[0])+',slot2:'+ str(SocketSensor.Output[1])+',slot3:'+str(SocketSensor.Output[2])+',slot4:'+str(SocketSensor.Output[3])) 
         except Exception as n:
             print n
             
